@@ -1,0 +1,40 @@
+.app {
+  width: 95%;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 10px;
+  border: 1px solid rgba(black, 0.1);
+  border-radius: 10px;
+}
+
+button {
+  padding: 15px 45px;
+  background: white;
+  box-shadow: 2px 2px 4px rgba(black, 0.1);
+  border: 1px solid rgba(black, 0.1);
+  margin: 0 10px;
+  text-transform: uppercase;
+  font-weight: 100;
+  font-size: 25px;
+  border-radius: 5px;
+
+  &.small {
+    font-size: 14px;
+    padding: 5px 15px;
+    margin: 0 3px;
+  }
+
+  &.success {
+    border-color: rgb(38, 190, 7);
+    color: rgb(38, 190, 7);
+  }
+
+  &.danger {
+    border-color: rgb(219, 2, 2);
+    color: rgb(219, 2, 2);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

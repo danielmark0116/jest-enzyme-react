@@ -1,0 +1,10 @@
+.PlayersList {
+  list-style-type: none;
+}
+
+@media (max-width: 500px) {
+  .PlayersList {
+    margin: 0;
+    padding: 0;
+  }
+}

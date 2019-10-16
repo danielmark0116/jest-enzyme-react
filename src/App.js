@@ -1,26 +1,61 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import './App.scss';
+import PlayersList from './components/PlayersList/PlayersList';
+import AddPlayer from './components/AddPlayer/AddPlayer';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      players: []
+    };
+  }
+
+  onScoreUpdate = (playerIndex, scoreChange) => {
+    this.setState({
+      players: this.state.players
+        .map((player, index) => {
+          if (index === playerIndex) {
+            return { ...player, score: player.score + scoreChange };
+          }
+          return player;
+        })
+        .sort((a, b) => b.score - a.score)
+    });
+  };
+
+  onPlayerAdd = playerName => {
+    const newPlayer = {
+      name: playerName,
+      score: 0
+    };
+
+    this.setState({
+      players: [...this.state.players, newPlayer]
+    });
+  };
+
+  removePlayer = (playersIndex, playerName) => {
+    this.setState({
+      players: this.state.players.filter(
+        (player, index) => index !== playersIndex
+      )
+    });
+  };
+
+  render() {
+    return (
+      <div className="app">
+        <AddPlayer onPlayerAdd={this.onPlayerAdd}></AddPlayer>
+        <PlayersList
+          players={this.state.players}
+          onScoreUpdate={this.onScoreUpdate}
+          removePlayer={this.removePlayer}
+        />
+      </div>
+    );
+  }
 }
 
 export default App;
